@@ -3,6 +3,7 @@ package godxero.control.foodItem;
 import godxero.db.DBConnection;
 import godxero.model.FoodItem;
 import godxero.model.FoodItemCategory;
+import javafx.scene.control.Alert;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -42,7 +43,7 @@ public class FoodItemController implements FoodItemService {
 				}
 			}
 		} catch (SQLException exception) {
-			System.out.println(exception.getMessage());
+			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 		}
 
 		return foodItems;

@@ -3,6 +3,7 @@ package godxero.control.admin;
 import godxero.db.DBConnection;
 import godxero.model.Admin;
 import godxero.model.AdminRole;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 
@@ -41,7 +42,7 @@ public class AdminController implements AdminService {
 
 			return null;
 		} catch (SQLException exception) {
-			System.out.println(exception.getMessage());
+			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 			return null;
 		}
 	}
@@ -61,7 +62,7 @@ public class AdminController implements AdminService {
 
 			return 0;
 		} catch (SQLException exception) {
-			System.out.println(exception.getMessage());
+			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 			return -1;
 		}
 	}
@@ -81,6 +82,7 @@ public class AdminController implements AdminService {
 
 			return 0;
 		} catch (SQLException exception) {
+			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 			return -1;
 		}
 	}
@@ -99,7 +101,7 @@ public class AdminController implements AdminService {
 				return statement.executeUpdate() == 1;
 			}
 		} catch (SQLException exception) {
-			System.out.println(exception.getMessage());
+			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 		}
 
 		return false;

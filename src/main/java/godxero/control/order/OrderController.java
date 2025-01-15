@@ -3,6 +3,7 @@ package godxero.control.order;
 import godxero.db.DBConnection;
 import godxero.model.Order;
 import godxero.model.OrderItem;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -69,15 +70,15 @@ public class OrderController implements OrderService {
 			try {
 				DBConnection.getInstance().getConnection().rollback();
 			} catch (SQLException rollbackException) {
-				System.out.println(rollbackException.getMessage());
+				new Alert(Alert.AlertType.ERROR, rollbackException.getMessage()).show();
 			}
 
-			System.out.println(exception.getMessage());
+			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 		} finally {
 			try {
 				DBConnection.getInstance().getConnection().setAutoCommit(true);
 			} catch (SQLException exception) {
-				System.out.println(exception.getMessage());
+				new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 			}
 		}
 

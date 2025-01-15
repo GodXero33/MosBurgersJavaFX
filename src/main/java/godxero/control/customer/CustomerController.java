@@ -2,6 +2,7 @@ package godxero.control.customer;
 
 import godxero.db.DBConnection;
 import godxero.model.Customer;
+import javafx.scene.control.Alert;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -63,7 +64,7 @@ public class CustomerController implements CustomerService {
 				}
 			}
 		} catch (SQLException exception) {
-			System.out.println(exception.getMessage());
+			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 		}
 
 		return customers;
@@ -74,7 +75,7 @@ public class CustomerController implements CustomerService {
 		try {
 			final Connection connection = DBConnection.getInstance().getConnection();
 
-			try (final PreparedStatement statement = connection.prepareStatement("INSERT INTO customer (name, phone, email, address) VALUES (?, ?, ?, ?)")) {
+			try (final PreparedStatement statement = connection.prepareStatement("INSERT INTO customer (name, phone, email, address) VALUES (?, ?, ?)")) {
 				statement.setString(1, customer.getName());
 				statement.setString(2, customer.getPhone());
 				statement.setString(3, customer.getEmail());
@@ -83,7 +84,7 @@ public class CustomerController implements CustomerService {
 				return statement.executeUpdate() == 1;
 			}
 		} catch (SQLException exception) {
-			System.out.println(exception.getMessage());
+			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 		}
 
 		return false;
