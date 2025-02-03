@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="471.0" prefWidth="600.0" stylesheets="@../css/login_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="godxero.controller.AddCustomerFormController">
+   <children>
+      <Label alignment="CENTER" prefHeight="92.0" prefWidth="600.0" styleClass="title" text="Add Customer">
+         <font>
+            <Font name="Agency FB Bold" size="44.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="54.0" layoutY="113.0" prefHeight="55.0" prefWidth="131.0" styleClass="input-label" text="Name">
+         <font>
+            <Font name="Agency FB Bold" size="27.0" />
+         </font>
+      </Label>
+      <TextField fx:id="customerNameTextField" layoutX="201.0" layoutY="113.0" prefHeight="55.0" prefWidth="370.0" promptText="Customer Name">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </TextField>
+      <Button layoutX="462.0" layoutY="398.0" mnemonicParsing="false" onAction="#customerAddButtonOnAction" prefHeight="55.0" prefWidth="109.0" text="Add">
+         <font>
+            <Font name="Agency FB Bold" size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label alignment="CENTER" layoutX="54.0" layoutY="182.0" prefHeight="55.0" prefWidth="131.0" styleClass="input-label" text="Phone">
+         <font>
+            <Font name="Agency FB Bold" size="27.0" />
+         </font>
+      </Label>
+      <TextField fx:id="customerPhoneTextField" layoutX="201.0" layoutY="182.0" prefHeight="55.0" prefWidth="370.0" promptText="Customer Phone">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="54.0" layoutY="250.0" prefHeight="55.0" prefWidth="131.0" styleClass="input-label" text="Email">
+         <font>
+            <Font name="Agency FB Bold" size="27.0" />
+         </font>
+      </Label>
+      <TextField fx:id="customerEmailTextField" layoutX="201.0" layoutY="250.0" prefHeight="55.0" prefWidth="370.0"
+                 promptText="Customer Email">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="54.0" layoutY="319.0" prefHeight="55.0" prefWidth="131.0" styleClass="input-label" text="Address">
+         <font>
+            <Font name="Agency FB Bold" size="27.0" />
+         </font>
+      </Label>
+      <TextField fx:id="customerAddressTextField" layoutX="201.0" layoutY="319.0" prefHeight="55.0" prefWidth="370.0" promptText="Customer Address">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="559.0" prefWidth="600.0" stylesheets="@../css/main_window_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="godxero.controller.ChangeCustomerFormController">
+   <children>
+      <TextField fx:id="customerIDTextField" layoutX="19.0" layoutY="38.0" prefHeight="38.0" prefWidth="564.0" promptText="ID">
+         <font>
+            <Font name="Agency FB" size="20.0" />
+         </font>
+      </TextField>
+      <Button fx:id="customerSelectButton" disable="true" layoutX="479.0" layoutY="507.0" mnemonicParsing="false" onAction="#customerSelectButtonOnAction" prefHeight="38.0" prefWidth="103.0" text="Select">
+         <font>
+            <Font name="Agency FB Bold" size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextField fx:id="customerNameTextField" layoutX="19.0" layoutY="86.0" prefHeight="38.0" prefWidth="564.0" promptText="Name">
+         <font>
+            <Font name="Agency FB" size="20.0" />
+         </font>
+      </TextField>
+      <Button layoutX="514.0" layoutY="225.0" mnemonicParsing="false" onAction="#customerSearchButtonOnAction" text="Search">
+         <font>
+            <Font name="Agency FB Bold" size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextField fx:id="customerPhoneTextField" layoutX="19.0" layoutY="132.0" prefHeight="38.0" prefWidth="564.0" promptText="Phone">
+         <font>
+            <Font name="Agency FB" size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="customerEmailTextField" layoutX="18.0" layoutY="178.0" prefHeight="38.0" prefWidth="564.0" promptText="Email">
+         <font>
+            <Font name="Agency FB" size="20.0" />
+         </font>
+      </TextField>
+      <TableView fx:id="customersListTable" layoutX="18.0" layoutY="269.0" prefHeight="233.0" prefWidth="564.0">
+        <columns>
+          <TableColumn fx:id="customersListIDColumn" editable="false" prefWidth="54.0" sortable="false" text="ID" />
+          <TableColumn fx:id="customersListNameColumn" editable="false" prefWidth="108.0" text="Name" />
+            <TableColumn fx:id="customersListPhoneColumn" editable="false" prefWidth="110.0" sortable="false" text="Phone" />
+            <TableColumn fx:id="customersListEmailColumn" editable="false" prefWidth="137.0" sortable="false" text="Email" />
+            <TableColumn fx:id="customersListAddressColumn" editable="false" prefWidth="154.0" sortable="false" text="Address" />
+        </columns>
+      </TableView>
+      <Button layoutX="19.0" layoutY="507.0" mnemonicParsing="false" onAction="#addCustomerButtonOnAction" text="Add New Customer">
+         <font>
+            <Font name="Agency FB Bold" size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

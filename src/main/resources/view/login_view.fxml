@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/login_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="godxero.controller.LoginFormController">
+   <children>
+      <Label alignment="CENTER" layoutX="-2.0" prefHeight="92.0" prefWidth="606.0" styleClass="title" text="Login">
+         <font>
+            <Font name="Agency FB Bold" size="44.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="44.0" layoutY="164.0" prefHeight="55.0" prefWidth="131.0" styleClass="input-label" text="User Name">
+         <font>
+            <Font name="Agency FB Bold" size="27.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="44.0" layoutY="227.0" prefHeight="55.0" prefWidth="131.0" styleClass="input-label" text="Password">
+         <font>
+            <Font name="Agency FB Bold" size="27.0" />
+         </font>
+      </Label>
+      <TextField fx:id="userNameTextField" layoutX="191.0" layoutY="164.0" onKeyPressed="#userNameTextFieldOnKeyPressed" prefHeight="55.0" prefWidth="370.0" promptText="User Name" text="GodXero">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </TextField>
+      <Button layoutX="452.0" layoutY="331.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="55.0" prefWidth="109.0" text="Login">
+         <font>
+            <Font name="Agency FB Bold" size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <PasswordField fx:id="passwordPasswordField" layoutX="191.0" layoutY="227.0" onKeyReleased="#passwordPasswordFieldOnKeyReleased" prefHeight="55.0" prefWidth="370.0" promptText="Password" text="1234">
+         <font>
+            <Font name="Agency FB Bold" size="13.0" />
+         </font>
+      </PasswordField>
+      <CheckBox layoutX="452.0" layoutY="291.0" mnemonicParsing="false" onAction="#showPasswordCheckBoxOnAction" styleClass="button" text="Show Password">
+         <font>
+            <Font name="Agency FB" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </CheckBox>
+      <TextField fx:id="passwordTextField" layoutX="191.0" layoutY="227.0" onKeyReleased="#passwordTextFieldOnKeyReleased" prefHeight="55.0" prefWidth="370.0" promptText="Password" text="1234" visible="false">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </TextField>
+      <Button layoutX="44.0" layoutY="331.0" mnemonicParsing="false" onAction="#signupButtonOnAction" prefHeight="55.0" prefWidth="109.0" text="Sign Up">
+         <font>
+            <Font name="Agency FB Bold" size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

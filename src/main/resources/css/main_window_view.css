@@ -1,0 +1,28 @@
+.input-label {
+    -fx-background-color: #dddddd;
+    -fx-text-fill: #000000;
+}
+
+.backspace-button {
+    -fx-background-color: #ff0000;
+    -fx-text-fill: #000000;
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+    -fx-border-radius: 5;
+    -fx-padding: 3 6 6 6;
+}
+
+.button{
+    -fx-background-color: #dddddd;
+    -fx-text-fill: #000000;
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+    -fx-border-radius: 5;
+    -fx-padding: 3 6 6 6;
+}
+
+.button:pressed {
+    -fx-text-fill: #565656;
+}
+
+.button:hover {
+    -fx-background-color: #ffcccc;
+}
