@@ -1,10 +1,9 @@
 package godxero.controller;
 
-import godxero.service.ServiceFactory;
+import com.google.inject.Inject;
 import godxero.service.custom.FoodItemService;
 import godxero.service.custom.OrderService;
 import godxero.dto.*;
-import godxero.util.ServiceType;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -79,8 +78,10 @@ public class MainWindowFormController implements Initializable {
 	private int adminID;
 	private int customerID;
 	private Map<String, Boolean> filteredCategories;
-	private final OrderService orderService = ServiceFactory.getInstance().getServiceType(ServiceType.ORDER);
-	private final FoodItemService foodItemService = ServiceFactory.getInstance().getServiceType(ServiceType.FOOD_ITEM);
+	@Inject
+	private OrderService orderService ;
+	@Inject
+	private FoodItemService foodItemService;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {

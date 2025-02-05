@@ -1,17 +1,17 @@
 package godxero.service.custom.impl;
 
+import com.google.inject.Inject;
 import godxero.dto.Order;
 import godxero.entity.OrderEntity;
-import godxero.repository.RepositoryFactory;
 import godxero.repository.custom.OrderRepository;
 import godxero.service.custom.OrderService;
-import godxero.util.RepositoryType;
 import org.modelmapper.ModelMapper;
 
 public class OrderServiceImpl implements OrderService {
 	private static OrderServiceImpl instance;
 
-	private final OrderRepository orderRepository = RepositoryFactory.getInstance().getRepositoryType(RepositoryType.ORDER);
+	@Inject
+	private OrderRepository orderRepository;
 
 	private OrderServiceImpl () {}
 

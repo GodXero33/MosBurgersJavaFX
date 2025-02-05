@@ -1,9 +1,8 @@
 package godxero.controller;
 
-import godxero.service.ServiceFactory;
+import com.google.inject.Inject;
 import godxero.service.custom.CustomerService;
 import godxero.dto.Customer;
-import godxero.util.ServiceType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,7 +48,8 @@ public class ChangeCustomerFormController implements Initializable {
 
 	@Setter
 	private MainWindowFormController parent;
-	private final CustomerService customerService = ServiceFactory.getInstance().getServiceType(ServiceType.CUSTOMER);
+	@Inject
+	private CustomerService customerService;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {

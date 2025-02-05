@@ -1,9 +1,8 @@
 package godxero.controller;
 
-import godxero.service.ServiceFactory;
+import com.google.inject.Inject;
 import godxero.service.custom.AdminService;
 import godxero.dto.Admin;
-import godxero.util.ServiceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +31,8 @@ public class AdminSignupFormController {
 	@FXML
 	public DatePicker dobPicker;
 
-	private final AdminService adminService = ServiceFactory.getInstance().getServiceType(ServiceType.ADMIN);
+	@Inject
+	private AdminService adminService;
 
 	private boolean validateNewAdminData () {
 		final String userName = this.userNameTextField.getText();

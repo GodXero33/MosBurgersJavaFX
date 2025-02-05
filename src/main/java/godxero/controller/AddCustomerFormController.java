@@ -1,9 +1,8 @@
 package godxero.controller;
 
-import godxero.service.ServiceFactory;
+import com.google.inject.Inject;
 import godxero.service.custom.CustomerService;
 import godxero.dto.Customer;
-import godxero.util.ServiceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -24,7 +23,8 @@ public class AddCustomerFormController {
 
 	@Setter
 	private ChangeCustomerFormController parent;
-	private final CustomerService customerService = ServiceFactory.getInstance().getServiceType(ServiceType.CUSTOMER);
+	@Inject
+	private CustomerService customerService;
 
 	public void customerAddButtonOnAction (ActionEvent actionEvent) {
 		final String name = this.customerNameTextField.getText();

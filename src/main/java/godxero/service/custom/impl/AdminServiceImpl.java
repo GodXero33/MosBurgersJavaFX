@@ -1,17 +1,17 @@
 package godxero.service.custom.impl;
 
+import com.google.inject.Inject;
 import godxero.dto.Admin;
 import godxero.entity.AdminEntity;
-import godxero.repository.RepositoryFactory;
 import godxero.repository.custom.AdminRepository;
 import godxero.service.custom.AdminService;
-import godxero.util.RepositoryType;
 import org.modelmapper.ModelMapper;
 
 public class AdminServiceImpl implements AdminService {
 	private static AdminServiceImpl instance;
 
-	private final AdminRepository adminRepository = RepositoryFactory.getInstance().getRepositoryType(RepositoryType.ADMIN);
+	@Inject
+	private AdminRepository adminRepository;
 
 	private AdminServiceImpl () {}
 

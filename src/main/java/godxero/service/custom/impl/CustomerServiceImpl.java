@@ -1,11 +1,10 @@
 package godxero.service.custom.impl;
 
+import com.google.inject.Inject;
 import godxero.dto.Customer;
 import godxero.entity.CustomerEntity;
-import godxero.repository.RepositoryFactory;
 import godxero.repository.custom.CustomerRepository;
 import godxero.service.custom.CustomerService;
-import godxero.util.RepositoryType;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
@@ -14,7 +13,8 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 	private static CustomerServiceImpl instance;
 
-	private final CustomerRepository customerRepository = RepositoryFactory.getInstance().getRepositoryType(RepositoryType.CUSTOMER);
+	@Inject
+	private CustomerRepository customerRepository;
 
 	private CustomerServiceImpl () {}
 

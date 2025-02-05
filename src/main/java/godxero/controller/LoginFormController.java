@@ -1,9 +1,8 @@
 package godxero.controller;
 
-import godxero.service.ServiceFactory;
+import com.google.inject.Inject;
 import godxero.service.custom.AdminService;
 import godxero.dto.Admin;
-import godxero.util.ServiceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +28,8 @@ public class LoginFormController {
 	public PasswordField passwordPasswordField;
 
 	private Admin loadedAdminDetail;
-	private final AdminService adminService = ServiceFactory.getInstance().getServiceType(ServiceType.ADMIN);
+	@Inject
+	private AdminService adminService;
 
 	@FXML
 	public void loginButtonOnAction (ActionEvent actionEvent) {

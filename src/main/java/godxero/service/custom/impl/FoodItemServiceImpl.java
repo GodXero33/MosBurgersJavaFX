@@ -1,11 +1,10 @@
 package godxero.service.custom.impl;
 
+import com.google.inject.Inject;
 import godxero.dto.FoodItem;
 import godxero.entity.FoodItemEntity;
-import godxero.repository.RepositoryFactory;
 import godxero.repository.custom.FoodItemRepository;
 import godxero.service.custom.FoodItemService;
-import godxero.util.RepositoryType;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
@@ -14,7 +13,8 @@ import java.util.List;
 public class FoodItemServiceImpl implements FoodItemService {
 	private static FoodItemServiceImpl instance;
 
-	private final FoodItemRepository foodItemRepository = RepositoryFactory.getInstance().getRepositoryType(RepositoryType.FOOD_ITEM);
+	@Inject
+	private FoodItemRepository foodItemRepository;
 
 	private FoodItemServiceImpl () {}
 
