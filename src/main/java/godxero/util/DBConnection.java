@@ -1,4 +1,4 @@
-package godxero.db;
+package godxero.util;
 
 import lombok.Getter;
 

@@ -1,9 +1,8 @@
 package godxero.repository.custom.impl;
 
-import godxero.db.DBConnection;
+import godxero.util.DBConnection;
 import godxero.entity.CustomerEntity;
 import godxero.repository.custom.CustomerRepository;
-import godxero.util.CrudUtil;
 import javafx.scene.control.Alert;
 
 import java.sql.*;

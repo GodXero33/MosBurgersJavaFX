@@ -1,7 +1,5 @@
 package godxero.util;
 
-import godxero.db.DBConnection;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 

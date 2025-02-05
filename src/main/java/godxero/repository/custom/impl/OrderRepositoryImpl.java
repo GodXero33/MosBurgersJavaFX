@@ -1,6 +1,6 @@
 package godxero.repository.custom.impl;
 
-import godxero.db.DBConnection;
+import godxero.util.DBConnection;
 import godxero.entity.OrderEntity;
 import godxero.entity.OrderItemEntity;
 import godxero.repository.custom.OrderRepository;
