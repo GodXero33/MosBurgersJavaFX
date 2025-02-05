@@ -1,6 +1,6 @@
 package godxero.service.custom.impl;
 
-import jakarta.inject.Inject;
+import com.google.inject.Inject;
 import godxero.dto.FoodItem;
 import godxero.entity.FoodItemEntity;
 import godxero.repository.custom.FoodItemRepository;

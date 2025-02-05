@@ -3,7 +3,7 @@ package godxero.controller;
 import godxero.service.custom.FoodItemService;
 import godxero.service.custom.OrderService;
 import godxero.dto.*;
-import jakarta.inject.Inject;
+import com.google.inject.Inject;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

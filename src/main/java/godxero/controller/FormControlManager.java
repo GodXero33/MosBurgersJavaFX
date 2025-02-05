@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.net.URL;
 
 public class FormControlManager {
-	public static Injector injector = Guice.createInjector(new AppModule());
+	private FormControlManager () {}
+
+	public static final Injector injector = Guice.createInjector(new AppModule());
 
 	public static FXMLLoader createForm (Stage stage, URL url, Class<?> cls) throws IOException {
 		final FXMLLoader loader = new FXMLLoader(url);

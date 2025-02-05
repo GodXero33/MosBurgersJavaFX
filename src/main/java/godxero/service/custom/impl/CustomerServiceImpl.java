@@ -1,6 +1,6 @@
 package godxero.service.custom.impl;
 
-import jakarta.inject.Inject;
+import com.google.inject.Inject;
 import godxero.dto.Customer;
 import godxero.entity.CustomerEntity;
 import godxero.repository.custom.CustomerRepository;

@@ -1,6 +1,6 @@
 package godxero.controller;
 
-import jakarta.inject.Inject;
+import com.google.inject.Inject;
 import godxero.service.custom.CustomerService;
 import godxero.dto.Customer;
 import javafx.collections.FXCollections;

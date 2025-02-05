@@ -1,6 +1,6 @@
 package godxero.service.custom.impl;
 
-import jakarta.inject.Inject;
+import com.google.inject.Inject;
 import godxero.dto.Admin;
 import godxero.entity.AdminEntity;
 import godxero.repository.custom.AdminRepository;
