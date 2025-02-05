@@ -6,5 +6,5 @@ import godxero.service.SuperService;
 import java.util.List;
 
 public interface FoodItemService extends SuperService {
-	List<FoodItem> getAllFoodItems();
+	List<FoodItem> getAll ();
 }

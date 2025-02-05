@@ -1,19 +1,22 @@
 package godxero.service.custom.impl;
 
 import godxero.dto.FoodItem;
+import godxero.entity.FoodItemEntity;
+import godxero.repository.RepositoryFactory;
+import godxero.repository.custom.FoodItemRepository;
 import godxero.service.custom.FoodItemService;
-import godxero.util.CrudUtil;
-import javafx.scene.control.Alert;
+import godxero.util.RepositoryType;
+import org.modelmapper.ModelMapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FoodItemServiceImpl implements FoodItemService {
 	private static FoodItemServiceImpl instance;
 
-	private FoodItemServiceImpl() {}
+	private final FoodItemRepository foodItemRepository = RepositoryFactory.getInstance().getRepositoryType(RepositoryType.FOOD_ITEM);
+
+	private FoodItemServiceImpl () {}
 
 	public static FoodItemServiceImpl getInstance () {
 		if (FoodItemServiceImpl.instance == null) FoodItemServiceImpl.instance = new FoodItemServiceImpl();
@@ -21,24 +24,12 @@ public class FoodItemServiceImpl implements FoodItemService {
 	}
 
 	@Override
-	public List<FoodItem> getAllFoodItems () {
+	public List<FoodItem> getAll () {
+		final List<FoodItemEntity> foodItemEntities = this.foodItemRepository.getAll();
 		final List<FoodItem> foodItems = new ArrayList<>();
+		final ModelMapper mapper = new ModelMapper();
 
-		try {
-			try (final ResultSet resultSet = CrudUtil.execute("SELECT item_id, name, code, price, discount, quantity, category FROM food_item")) {
-				while (resultSet.next()) foodItems.add(new FoodItem(
-					resultSet.getInt(1),
-					resultSet.getString(2),
-					resultSet.getString(3),
-					resultSet.getDouble(4),
-					resultSet.getDouble(5),
-					resultSet.getInt(6),
-					resultSet.getString(7)
-				));
-			}
-		} catch (SQLException exception) {
-			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
-		}
+		foodItemEntities.forEach(foodItemEntity -> mapper.map(foodItemEntity, FoodItem.class));
 
 		return foodItems;
 	}

@@ -206,7 +206,7 @@ public class MainWindowFormController implements Initializable {
 	}
 
 	private void updatePlaceOrderItemsTable () {
-		this.placeOrderFoodItemsList = this.foodItemService.getAllFoodItems();
+		this.placeOrderFoodItemsList = this.foodItemService.getAll();
 		this.updatePlaceOrderItemsTable(this.placeOrderFoodItemsList);
 	}
 
@@ -245,7 +245,7 @@ public class MainWindowFormController implements Initializable {
 
 	private void refreshPlaceOrderFoodItemsListTable () {
 		// Retrieve food items from the database again and update the items table. If there is any text already in the search text field, then update table with filtered food items.
-		this.placeOrderFoodItemsList = this.foodItemService.getAllFoodItems();
+		this.placeOrderFoodItemsList = this.foodItemService.getAll();
 		final String filterName = this.placeOrderSearchItemTextField.getText();
 
 		if (filterName.isEmpty()) {

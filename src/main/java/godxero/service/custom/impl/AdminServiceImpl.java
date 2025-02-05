@@ -5,12 +5,8 @@ import godxero.entity.AdminEntity;
 import godxero.repository.RepositoryFactory;
 import godxero.repository.custom.AdminRepository;
 import godxero.service.custom.AdminService;
-import godxero.util.CrudUtil;
 import godxero.util.RepositoryType;
-import javafx.scene.control.Alert;
 import org.modelmapper.ModelMapper;
-
-import java.sql.*;
 
 public class AdminServiceImpl implements AdminService {
 	private static AdminServiceImpl instance;
