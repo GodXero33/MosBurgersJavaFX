@@ -31,21 +31,24 @@ public class LoginFormController {
 	private Admin loadedAdminDetail;
 	private final AdminService adminService = ServiceFactory.getInstance().getServiceType(ServiceType.ADMIN);
 
+	@FXML
 	public void loginButtonOnAction (ActionEvent actionEvent) {
 		final String userName = this.userNameTextField.getText();
 		final String password = this.passwordTextField.getText();
 
 		if (userName.isEmpty()) {
 			new Alert(Alert.AlertType.WARNING, "User name is Empty.").show();
+			this.userNameTextField.requestFocus();
 			return;
 		}
 
 		if (password.isEmpty()) {
 			new Alert(Alert.AlertType.WARNING, "Password is Empty.").show();
+			(this.passwordPasswordField.isVisible() ? this.passwordPasswordField : this.passwordTextField).requestFocus();
 			return;
 		}
 
-		if (this.loadedAdminDetail == null) this.loadedAdminDetail = this.adminService.getAdmin(userName);
+		if (this.loadedAdminDetail == null) this.loadedAdminDetail = this.adminService.search(userName);
 
 		if (this.loadedAdminDetail == null) {
 			new Alert(Alert.AlertType.WARNING, "User name is not found.").show();
@@ -81,6 +84,7 @@ public class LoginFormController {
 		}
 	}
 
+	@FXML
 	public void showPasswordCheckBoxOnAction (ActionEvent actionEvent) {
 		final boolean isChecked = ((CheckBox) actionEvent.getTarget()).isSelected();
 
@@ -88,14 +92,17 @@ public class LoginFormController {
 		this.passwordTextField.setVisible(isChecked);
 	}
 
+	@FXML
 	public void passwordPasswordFieldOnKeyReleased (KeyEvent keyEvent) {
 		this.passwordTextField.setText(((PasswordField) keyEvent.getTarget()).getText());
 	}
 
+	@FXML
 	public void passwordTextFieldOnKeyReleased (KeyEvent keyEvent) {
 		this.passwordPasswordField.setText(((TextField) keyEvent.getTarget()).getText());
 	}
 
+	@FXML
 	public void signupButtonOnAction (ActionEvent actionEvent) {
 		try {
 			// Open new stage. (Sign up view)
@@ -113,6 +120,7 @@ public class LoginFormController {
 		}
 	}
 
+	@FXML
 	public void userNameTextFieldOnKeyPressed (KeyEvent keyEvent) {
 		this.loadedAdminDetail = null;
 	}

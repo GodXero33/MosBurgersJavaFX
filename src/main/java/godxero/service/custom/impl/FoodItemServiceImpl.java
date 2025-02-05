@@ -1,7 +1,6 @@
 package godxero.service.custom.impl;
 
 import godxero.dto.FoodItem;
-import godxero.dto.FoodItemCategory;
 import godxero.service.custom.FoodItemService;
 import godxero.util.CrudUtil;
 import javafx.scene.control.Alert;
@@ -34,7 +33,7 @@ public class FoodItemServiceImpl implements FoodItemService {
 					resultSet.getDouble(4),
 					resultSet.getDouble(5),
 					resultSet.getInt(6),
-					FoodItemCategory.getCategory(resultSet.getString(7))
+					resultSet.getString(7)
 				));
 			}
 		} catch (SQLException exception) {

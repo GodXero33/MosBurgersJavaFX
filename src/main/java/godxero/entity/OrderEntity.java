@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-@Getter
 @NoArgsConstructor
+@Getter
 @Setter
 @ToString
 public class OrderEntity {

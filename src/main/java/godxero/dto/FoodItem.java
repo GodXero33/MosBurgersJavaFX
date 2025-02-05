@@ -1,11 +1,9 @@
 package godxero.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -16,5 +14,5 @@ public class FoodItem {
 	private Double price;
 	private Double discount;
 	private Integer quantity;
-	private FoodItemCategory category;
+	private String category;
 }

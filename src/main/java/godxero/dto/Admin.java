@@ -1,11 +1,9 @@
 package godxero.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -16,7 +14,7 @@ public class Admin {
 	private String email;
 	private String address;
 	private Double salary;
-	private AdminRole role;
+	private String role;
 	private String dob;
 	private String password;
 }

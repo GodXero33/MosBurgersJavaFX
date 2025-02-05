@@ -1,6 +1,5 @@
 package godxero.repository.custom.impl;
 
-import godxero.dto.FoodItem;
 import godxero.entity.FoodItemEntity;
 import godxero.repository.custom.FoodItemRepository;
 

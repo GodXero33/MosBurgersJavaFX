@@ -1,6 +1,5 @@
 package godxero.repository.custom.impl;
 
-import godxero.dto.Order;
 import godxero.entity.OrderEntity;
 import godxero.repository.custom.OrderRepository;
 

@@ -23,7 +23,7 @@ CREATE TABLE food_item (
 
 CREATE TABLE `admin` (
 	admin_id INT AUTO_INCREMENT,
-	name VARCHAR(30),
+	name VARCHAR(30) UNIQUE,
 	phone VARCHAR(12) UNIQUE,
 	email VARCHAR(30),
 	address VARCHAR(60),

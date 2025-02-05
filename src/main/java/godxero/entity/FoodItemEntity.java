@@ -1,12 +1,9 @@
 package godxero.entity;
 
-import godxero.dto.FoodItemCategory;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -17,5 +14,5 @@ public class FoodItemEntity {
 	private Double price;
 	private Double discount;
 	private Integer quantity;
-	private FoodItemCategory category;
+	private String category;
 }

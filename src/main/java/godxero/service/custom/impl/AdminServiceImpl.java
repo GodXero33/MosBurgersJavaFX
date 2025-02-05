@@ -1,15 +1,21 @@
 package godxero.service.custom.impl;
 
 import godxero.dto.Admin;
-import godxero.dto.AdminRole;
+import godxero.entity.AdminEntity;
+import godxero.repository.RepositoryFactory;
+import godxero.repository.custom.AdminRepository;
 import godxero.service.custom.AdminService;
 import godxero.util.CrudUtil;
+import godxero.util.RepositoryType;
 import javafx.scene.control.Alert;
+import org.modelmapper.ModelMapper;
 
 import java.sql.*;
 
 public class AdminServiceImpl implements AdminService {
 	private static AdminServiceImpl instance;
+
+	private final AdminRepository adminRepository = RepositoryFactory.getInstance().getRepositoryType(RepositoryType.ADMIN);
 
 	private AdminServiceImpl() {}
 
@@ -19,26 +25,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Admin getAdmin (String adminName) {
-		try {
-			try (final ResultSet resultSet = CrudUtil.execute("SELECT * FROM admin WHERE name = ?", adminName)) {
-				if (resultSet.next()) return new Admin(
-					resultSet.getInt(1),
-					resultSet.getString(2),
-					resultSet.getString(3),
-					resultSet.getString(4),
-					resultSet.getString(5),
-					resultSet.getDouble(6),
-					AdminRole.getRole(resultSet.getString(7)),
-					resultSet.getString(8),
-					resultSet.getString(9)
-				);
-			}
-		} catch (SQLException exception) {
-			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
-		}
+	public Admin search (String adminName) {
+		final AdminEntity adminEntity = this.adminRepository.search(adminName);
 
-		return null;
+		if (adminEntity == null) return null;
+
+		return new ModelMapper().map(adminEntity, Admin.class);
 	}
 
 	@Override

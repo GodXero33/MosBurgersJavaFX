@@ -27,10 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainWindowFormController implements Initializable {
 	@FXML
@@ -81,7 +78,7 @@ public class MainWindowFormController implements Initializable {
 	private Order currentOrder;
 	private int adminID;
 	private int customerID;
-	private boolean[] filteredCategories;
+	private Map<String, Boolean> filteredCategories;
 	private final OrderService orderService = ServiceFactory.getInstance().getServiceType(ServiceType.ORDER);
 	private final FoodItemService foodItemService = ServiceFactory.getInstance().getServiceType(ServiceType.FOOD_ITEM);
 
@@ -90,7 +87,12 @@ public class MainWindowFormController implements Initializable {
 		this.currentOrder = new Order(); // Make an empty order
 		this.adminID = -1;
 		this.customerID = -1;
-		this.filteredCategories = new boolean[4];
+		this.filteredCategories = new HashMap<>();
+
+		this.filteredCategories.put("Burgers", false);
+		this.filteredCategories.put("Submarines", false);
+		this.filteredCategories.put("Beverages", false);
+		this.filteredCategories.put("Other", false);
 
 		this.setupPlaceOrderItemsListTable();
 		this.setupPlaceOrderCartTable();
@@ -165,7 +167,7 @@ public class MainWindowFormController implements Initializable {
 		this.placeOrderItemNameLabel.setText(foodItem.getName());
 		this.placeOrderItemPriceLabel.setText(foodItem.getPrice() + " Rs");
 		this.placeOrderItemDiscountLabel.setText(foodItem.getDiscount() + " Rs");
-		this.placeOrderItemCategoryLabel.setText(foodItem.getCategory().toString());
+		this.placeOrderItemCategoryLabel.setText(foodItem.getCategory());
 		this.placeOrderTotalAmountLabel.setText(String.format("%.2f Rs", this.calculateTotalAmount())); // Update total amount text field after updating the item details section.
 		this.placeOrderItemStockLabel.setText(foodItem.getQuantity().toString());
 	}
@@ -177,7 +179,7 @@ public class MainWindowFormController implements Initializable {
 		this.placeOrderItemNameLabel.setText(foodItem.getName());
 		this.placeOrderItemPriceLabel.setText(foodItem.getPrice() + " Rs");
 		this.placeOrderItemDiscountLabel.setText(foodItem.getDiscount() + " Rs");
-		this.placeOrderItemCategoryLabel.setText(foodItem.getCategory().toString());
+		this.placeOrderItemCategoryLabel.setText(foodItem.getCategory());
 		this.placeOrderItemQuantityTextField.setText(orderItem.getQuantity().toString());
 		this.placeOrderTotalAmountLabel.setText(String.format("%.2f Rs", this.calculateTotalAmount())); // Update total amount text field after updating the item details section.
 	}
@@ -186,14 +188,14 @@ public class MainWindowFormController implements Initializable {
 		final ObservableList<FoodItem> filteredFoodItemsList = FXCollections.observableArrayList();
 		boolean isFiltering = false;
 
-		for (final boolean status : this.filteredCategories) if (status) {
+		for (final String key : this.filteredCategories.keySet()) if (this.filteredCategories.get(key).equals(true)) {
 			isFiltering = true;
 			break;
 		}
 
 		if (isFiltering) {
 			foodItemsList.forEach(foodItem -> {
-				if (this.filteredCategories[FoodItemCategory.asIndex(foodItem.getCategory())]) filteredFoodItemsList.add(foodItem);
+				if (this.filteredCategories.get(foodItem.getCategory()).equals(true)) filteredFoodItemsList.add(foodItem);
 			});
 
 			this.placeOrderItemsListTable.setItems(filteredFoodItemsList);
@@ -236,9 +238,8 @@ public class MainWindowFormController implements Initializable {
 		this.placeOrderItemStockLabel.setText("0");
 	}
 
-	private void updatePlaceOrderFilterFoodItemCheckBoxStatus (int index, boolean status) {
-		this.filteredCategories[index] = status;
-
+	private void updatePlaceOrderFilterFoodItemCheckBoxStatus (String key, boolean status) {
+		this.filteredCategories.put(key, status);
 		this.updatePlaceOrderItemsTable(this.placeOrderFoodItemsList);
 	}
 
@@ -401,22 +402,22 @@ public class MainWindowFormController implements Initializable {
 
 	@FXML
 	public void placeOrderFoodItemFilterBurgerCheckBoxOnAction (ActionEvent actionEvent) {
-		this.updatePlaceOrderFilterFoodItemCheckBoxStatus(0, ((CheckBox) actionEvent.getTarget()).isSelected());
+		this.updatePlaceOrderFilterFoodItemCheckBoxStatus("Burger", ((CheckBox) actionEvent.getTarget()).isSelected());
 	}
 
 	@FXML
 	public void placeOrderFoodItemFilterSubmarinesCheckBoxOnAction (ActionEvent actionEvent) {
-		this.updatePlaceOrderFilterFoodItemCheckBoxStatus(1, ((CheckBox) actionEvent.getTarget()).isSelected());
+		this.updatePlaceOrderFilterFoodItemCheckBoxStatus("Submarines", ((CheckBox) actionEvent.getTarget()).isSelected());
 	}
 
 	@FXML
 	public void placeOrderFoodItemFilterBeveragesCheckBoxOnAction (ActionEvent actionEvent) {
-		this.updatePlaceOrderFilterFoodItemCheckBoxStatus(2, ((CheckBox) actionEvent.getTarget()).isSelected());
+		this.updatePlaceOrderFilterFoodItemCheckBoxStatus("Beverages", ((CheckBox) actionEvent.getTarget()).isSelected());
 	}
 
 	@FXML
 	public void placeOrderFoodItemFilterOtherCheckBoxOnAction (ActionEvent actionEvent) {
-		this.updatePlaceOrderFilterFoodItemCheckBoxStatus(3, ((CheckBox) actionEvent.getTarget()).isSelected());
+		this.updatePlaceOrderFilterFoodItemCheckBoxStatus("Other", ((CheckBox) actionEvent.getTarget()).isSelected());
 	}
 
 	@FXML

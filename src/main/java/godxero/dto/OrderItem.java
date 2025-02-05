@@ -2,8 +2,9 @@ package godxero.dto;
 
 import lombok.*;
 
-@Getter
+@AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Setter
 @ToString
 public class OrderItem {

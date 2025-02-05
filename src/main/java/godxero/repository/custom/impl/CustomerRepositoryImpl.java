@@ -1,6 +1,5 @@
 package godxero.repository.custom.impl;
 
-import godxero.dto.Customer;
 import godxero.entity.CustomerEntity;
 import godxero.repository.custom.CustomerRepository;
 import godxero.util.CrudUtil;
