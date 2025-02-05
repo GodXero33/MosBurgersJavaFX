@@ -22,12 +22,24 @@ public class AdminRepositoryImpl implements AdminRepository {
 
 	@Override
 	public boolean save (AdminEntity entity) {
+		try {
+			return (Integer) CrudUtil.execute(
+				"INSERT INTO admin (name, email, dob, password) VALUES (?, ?, ?, ?)",
+				entity.getName(),
+				entity.getEmail(),
+				entity.getDob(),
+				entity.getPassword()
+			) == 1;
+		} catch (SQLException exception) {
+			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+		}
+
 		return false;
 	}
 
-	private AdminEntity search (String fieldName, Object data) {
+	private AdminEntity search (String fieldName, Object bindData) {
 		try {
-			final ResultSet resultSet = CrudUtil.execute(String.format("SELECT admin_id, name, phone, email, address, salary, position, dob, password FROM `admin` WHERE %s = ?", fieldName), data);
+			final ResultSet resultSet = CrudUtil.execute(String.format("SELECT admin_id, name, phone, email, address, salary, position, dob, password FROM `admin` WHERE %s = ?", fieldName), bindData);
 
 			if (resultSet.next()) return new AdminEntity(
 				resultSet.getInt(1),
@@ -55,6 +67,26 @@ public class AdminRepositoryImpl implements AdminRepository {
 	@Override
 	public AdminEntity search (String adminName) {
 		return this.search("name", adminName);
+	}
+
+	private int getFieldAvailability (String fieldName, Object bindData) {
+		try {
+			final ResultSet resultSet = CrudUtil.execute(String.format("SELECT admin_id FROM admin WHERE %s = ?", fieldName), bindData);
+			return resultSet.next() ? 1 : 0;
+		} catch (SQLException exception) {
+			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+			return -1;
+		}
+	}
+
+	@Override
+	public int getAdminNameAvailability (String adminName) {
+		return this.getFieldAvailability("name", adminName);
+	}
+
+	@Override
+	public int getEmailAvailability (String email) {
+		return this.getFieldAvailability("email", email);
 	}
 
 	@Override

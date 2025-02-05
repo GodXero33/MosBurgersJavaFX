@@ -17,10 +17,11 @@ public class AdminServiceImpl implements AdminService {
 
 	private final AdminRepository adminRepository = RepositoryFactory.getInstance().getRepositoryType(RepositoryType.ADMIN);
 
-	private AdminServiceImpl() {}
+	private AdminServiceImpl () {}
 
 	public static AdminServiceImpl getInstance () {
 		if (AdminServiceImpl.instance == null) AdminServiceImpl.instance = new AdminServiceImpl();
+
 		return AdminServiceImpl.instance;
 	}
 
@@ -34,43 +35,17 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int isAdminNameAvailable (String adminName) {
-		try {
-			try (final ResultSet resultSet = CrudUtil.execute("SELECT admin_id FROM admin WHERE name = ?", adminName)) {
-				return resultSet.next() ? 1 : 0;
-			}
-		} catch (SQLException exception) {
-			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
-			return -1;
-		}
+	public int getAdminNameAvailability (String adminName) {
+		return this.adminRepository.getAdminNameAvailability(adminName);
 	}
 
 	@Override
-	public int isEmailAvailable (String email) {
-		try {
-			try (final ResultSet resultSet = CrudUtil.execute("SELECT admin_id FROM admin WHERE email = ?", email)) {
-				return resultSet.next() ? 1 : 0;
-			}
-		} catch (SQLException exception) {
-			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
-			return -1;
-		}
+	public int getEmailAvailability (String email) {
+		return this.adminRepository.getEmailAvailability(email);
 	}
 
 	@Override
 	public boolean addAdmin (Admin admin) {
-		try {
-			return (Integer) CrudUtil.execute(
-				"INSERT INTO admin (name, email, dob, password) VALUES (?, ?, ?, ?)",
-				admin.getName(),
-				admin.getEmail(),
-				admin.getDob(),
-				admin.getPassword()
-			) == 1;
-		} catch (SQLException exception) {
-			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
-		}
-
-		return false;
+		return this.adminRepository.save(new ModelMapper().map(admin, AdminEntity.class));
 	}
 }

@@ -1,7 +1,10 @@
 package godxero.controller;
 
+import godxero.service.ServiceFactory;
+import godxero.service.custom.AdminService;
 import godxero.service.custom.impl.AdminServiceImpl;
 import godxero.dto.Admin;
+import godxero.util.ServiceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +33,8 @@ public class AdminSignupFormController {
 	@FXML
 	public DatePicker dobPicker;
 
+	private final AdminService adminService = ServiceFactory.getInstance().getServiceType(ServiceType.ADMIN);
+
 	private boolean validateNewAdminData () {
 		final String userName = this.userNameTextField.getText();
 		final String password = this.passwordField.getText();
@@ -44,9 +49,16 @@ public class AdminSignupFormController {
 			return false;
 		}
 
-		if (AdminServiceImpl.getInstance().isAdminNameAvailable(userName) == 1) {
+		final int adminNameAvailability = this.adminService.getAdminNameAvailability(userName);
+
+		if (adminNameAvailability == 1) {
 			new Alert(Alert.AlertType.WARNING, "User name has already taken.").show();
 			this.userNameTextField.requestFocus();
+			return false;
+		}
+
+		if (adminNameAvailability == -1) {
+			new Alert(Alert.AlertType.ERROR, "Something went wrong. Please try again.").show();
 			return false;
 		}
 
@@ -74,9 +86,16 @@ public class AdminSignupFormController {
 			return false;
 		}
 
-		if (AdminServiceImpl.getInstance().isEmailAvailable(email) == 1) {
+		final int emailAvailability = this.adminService.getEmailAvailability(email);
+
+		if (emailAvailability == 1) {
 			new Alert(Alert.AlertType.WARNING, "There is already a account with given email address.").show();
 			this.emailTextField.requestFocus();
+			return false;
+		}
+
+		if (emailAvailability == -1) {
+			new Alert(Alert.AlertType.ERROR, "Something went wrong. Please try again.").show();
 			return false;
 		}
 
@@ -87,9 +106,10 @@ public class AdminSignupFormController {
 		}
 
 		final BasicTextEncryptor encryptor = new BasicTextEncryptor();
+
 		encryptor.setPassword("12ab@3hsbv");
 
-		if (!AdminServiceImpl.getInstance().addAdmin(new Admin(null, userName, null, email, null, null, null, dob, encryptor.encrypt(password)))) {
+		if (!this.adminService.addAdmin(new Admin(null, userName, null, email, null, null, null, dob, encryptor.encrypt(password)))) {
 			new Alert(Alert.AlertType.ERROR, "Failed to add admin. Please try again").show();
 			return false;
 		}
