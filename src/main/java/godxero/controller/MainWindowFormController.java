@@ -79,9 +79,9 @@ public class MainWindowFormController implements Initializable {
 	private int customerID;
 	private Map<String, Boolean> filteredCategories;
 	@Inject
-	private OrderService orderService;
+	public OrderService orderService;
 	@Inject
-	private FoodItemService foodItemService;
+	public FoodItemService foodItemService;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {

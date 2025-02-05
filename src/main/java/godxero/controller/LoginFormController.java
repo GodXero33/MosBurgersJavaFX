@@ -1,7 +1,6 @@
 package godxero.controller;
 
-import godxero.Starter;
-import jakarta.inject.Inject;
+import com.google.inject.Inject;
 import godxero.service.custom.AdminService;
 import godxero.dto.Admin;
 import javafx.event.ActionEvent;
@@ -66,10 +65,9 @@ public class LoginFormController {
 
 		try {
 			// Open new stage. (Main application view)
-			final FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../../view/main_window_view.fxml"));
 			final Stage stage = new Stage();
+			final FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../../view/main_window_view.fxml"));
 
-			loader.setController(Starter.injector.getInstance(MainWindowFormController.class));
 			stage.setTitle("Mos Burgers");
 			stage.setScene(new Scene(loader.load()));
 			stage.setResizable(false);
