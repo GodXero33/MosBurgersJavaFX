@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="573.0" prefWidth="1161.0" stylesheets="@../css/main_window_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="godxero.controller.MainWindowFormController">
+<AnchorPane prefHeight="573.0" prefWidth="1161.0" stylesheets="@../css/main_window_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane layoutY="79.0" prefHeight="491.0" prefWidth="1161.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
         <tabs>
