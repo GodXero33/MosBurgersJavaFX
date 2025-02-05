@@ -14,17 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
-	private static CustomerRepositoryImpl instance;
-
-	private CustomerRepositoryImpl () {}
-
-	public static CustomerRepositoryImpl getInstance () {
-		if (CustomerRepositoryImpl.instance == null) CustomerRepositoryImpl.instance = new CustomerRepositoryImpl();
-
-		return CustomerRepositoryImpl.instance;
-	}
-
-
 	@Override
 	public boolean save (CustomerEntity entity) {
 		try {

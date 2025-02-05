@@ -12,16 +12,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class OrderRepositoryImpl implements OrderRepository {
-	private static OrderRepositoryImpl instance;
-
-	private OrderRepositoryImpl () {}
-
-	public static OrderRepositoryImpl getInstance () {
-		if (OrderRepositoryImpl.instance == null) OrderRepositoryImpl.instance = new OrderRepositoryImpl();
-
-		return OrderRepositoryImpl.instance;
-	}
-
 	@Override
 	public boolean save (OrderEntity entity) {
 		try {

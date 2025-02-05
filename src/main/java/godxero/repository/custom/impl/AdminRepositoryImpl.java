@@ -10,16 +10,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AdminRepositoryImpl implements AdminRepository {
-	private static AdminRepositoryImpl instance;
-
-	private AdminRepositoryImpl () {}
-
-	public static AdminRepositoryImpl getInstance () {
-		if (AdminRepositoryImpl.instance == null) AdminRepositoryImpl.instance = new AdminRepositoryImpl();
-
-		return AdminRepositoryImpl.instance;
-	}
-
 	@Override
 	public boolean save (AdminEntity entity) {
 		try {

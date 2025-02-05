@@ -1,9 +1,9 @@
 package godxero.controller;
 
-import com.google.inject.Inject;
 import godxero.service.custom.FoodItemService;
 import godxero.service.custom.OrderService;
 import godxero.dto.*;
+import jakarta.inject.Inject;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -79,7 +79,7 @@ public class MainWindowFormController implements Initializable {
 	private int customerID;
 	private Map<String, Boolean> filteredCategories;
 	@Inject
-	private OrderService orderService ;
+	private OrderService orderService;
 	@Inject
 	private FoodItemService foodItemService;
 

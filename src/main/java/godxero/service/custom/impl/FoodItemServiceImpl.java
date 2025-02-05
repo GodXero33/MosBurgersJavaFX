@@ -1,6 +1,6 @@
 package godxero.service.custom.impl;
 
-import com.google.inject.Inject;
+import jakarta.inject.Inject;
 import godxero.dto.FoodItem;
 import godxero.entity.FoodItemEntity;
 import godxero.repository.custom.FoodItemRepository;
@@ -11,17 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FoodItemServiceImpl implements FoodItemService {
-	private static FoodItemServiceImpl instance;
-
 	@Inject
 	private FoodItemRepository foodItemRepository;
-
-	private FoodItemServiceImpl () {}
-
-	public static FoodItemServiceImpl getInstance () {
-		if (FoodItemServiceImpl.instance == null) FoodItemServiceImpl.instance = new FoodItemServiceImpl();
-		return FoodItemServiceImpl.instance;
-	}
 
 	@Override
 	public List<FoodItem> getAll () {

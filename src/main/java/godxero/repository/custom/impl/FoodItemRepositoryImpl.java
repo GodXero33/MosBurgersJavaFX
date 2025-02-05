@@ -11,16 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FoodItemRepositoryImpl implements FoodItemRepository {
-	private static FoodItemRepositoryImpl instance;
-
-	private FoodItemRepositoryImpl () {}
-
-	public static FoodItemRepositoryImpl getInstance () {
-		if (FoodItemRepositoryImpl.instance == null) FoodItemRepositoryImpl.instance = new FoodItemRepositoryImpl();
-
-		return FoodItemRepositoryImpl.instance;
-	}
-
 	@Override
 	public boolean save (FoodItemEntity entity) {
 		return false;

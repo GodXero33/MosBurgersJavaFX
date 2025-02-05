@@ -20,10 +20,10 @@ public class RepositoryFactory {
 	@SuppressWarnings("unchecked")
 	public <T extends SuperRepository> T getRepositoryType (RepositoryType repositoryType) {
 		return switch (repositoryType) {
-			case RepositoryType.ADMIN -> (T) AdminRepositoryImpl.getInstance();
-			case RepositoryType.CUSTOMER -> (T) CustomerRepositoryImpl.getInstance();
-			case RepositoryType.FOOD_ITEM -> (T) FoodItemRepositoryImpl.getInstance();
-			case RepositoryType.ORDER -> (T) OrderRepositoryImpl.getInstance();
+			case RepositoryType.ADMIN -> (T) new AdminRepositoryImpl();
+			case RepositoryType.CUSTOMER -> (T) new CustomerRepositoryImpl();
+			case RepositoryType.FOOD_ITEM -> (T) new FoodItemRepositoryImpl();
+			case RepositoryType.ORDER -> (T) new OrderRepositoryImpl();
 		};
 	}
 }

@@ -1,5 +1,8 @@
 package godxero;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import godxero.util.AppModule;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +17,11 @@ public class Starter extends Application {
 
 	@Override
 	public void start (Stage stage) throws IOException {
-		stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("../view/login_view.fxml"))));
+		final Injector injector = Guice.createInjector(new AppModule());
+		final FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/login_view.fxml"));
+
+		loader.setControllerFactory(injector::getInstance);
+		stage.setScene(new Scene(loader.load()));
 		stage.setResizable(false);
 		stage.setTitle("Login");
 		stage.show();

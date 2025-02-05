@@ -1,6 +1,6 @@
 package godxero.service.custom.impl;
 
-import com.google.inject.Inject;
+import jakarta.inject.Inject;
 import godxero.dto.Customer;
 import godxero.entity.CustomerEntity;
 import godxero.repository.custom.CustomerRepository;
@@ -11,17 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService {
-	private static CustomerServiceImpl instance;
-
 	@Inject
 	private CustomerRepository customerRepository;
-
-	private CustomerServiceImpl () {}
-
-	public static CustomerServiceImpl getInstance () {
-		if (CustomerServiceImpl.instance == null) CustomerServiceImpl.instance = new CustomerServiceImpl();
-		return CustomerServiceImpl.instance;
-	}
 
 	@Override
 	public List<Customer> searchCustomerWithAny (Integer id, String name, String phone, String email) {

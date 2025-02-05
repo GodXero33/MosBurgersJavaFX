@@ -1,6 +1,6 @@
 package godxero.controller;
 
-import com.google.inject.Inject;
+import jakarta.inject.Inject;
 import godxero.service.custom.AdminService;
 import godxero.dto.Admin;
 import javafx.event.ActionEvent;

@@ -1,6 +1,6 @@
 package godxero.controller;
 
-import com.google.inject.Inject;
+import jakarta.inject.Inject;
 import godxero.service.custom.AdminService;
 import godxero.dto.Admin;
 import javafx.event.ActionEvent;
@@ -80,7 +80,7 @@ public class LoginFormController {
 			((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
 		} catch (IOException exception) {
 			new Alert(Alert.AlertType.ERROR, "Failed to load application.").show();
-			System.out.println(exception.getMessage());
+			exception.printStackTrace();
 		}
 	}
 
