@@ -66,10 +66,9 @@ public class LoginFormController {
 		try {
 			// Open new stage. (Main application view)
 			final Stage stage = new Stage();
-			final FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../../view/main_window_view.fxml"));
+			final FXMLLoader loader = FormControlManager.createForm(stage, this.getClass().getResource("../../view/main_window_view.fxml"), MainWindowFormController.class);
 
 			stage.setTitle("Mos Burgers");
-			stage.setScene(new Scene(loader.load()));
 			stage.setResizable(false);
 
 			((MainWindowFormController) loader.getController()).setAdmin(this.loadedAdminDetail);
@@ -80,7 +79,7 @@ public class LoginFormController {
 			((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
 		} catch (IOException exception) {
 			new Alert(Alert.AlertType.ERROR, "Failed to load application.").show();
-			exception.printStackTrace();
+			System.out.println(exception.getMessage());
 		}
 	}
 
@@ -108,8 +107,8 @@ public class LoginFormController {
 			// Open new stage. (Sign up view)
 			final Stage stage = new Stage();
 
+			FormControlManager.createForm(stage, this.getClass().getResource("../../view/admin_signup_view.fxml"), AdminSignupFormController.class);
 			stage.setTitle("Sign Up");
-			stage.setScene(new Scene(new FXMLLoader(this.getClass().getResource("../../view/admin_signup_view.fxml")).load()));
 			stage.setResizable(false);
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());

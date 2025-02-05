@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public boolean addCustomer (Customer customer) {
-		return this.customerRepository.save(null);
+	public int addCustomer (Customer customer) {
+		return this.customerRepository.addCustomer(new ModelMapper().map(customer, CustomerEntity.class));
 	}
 }

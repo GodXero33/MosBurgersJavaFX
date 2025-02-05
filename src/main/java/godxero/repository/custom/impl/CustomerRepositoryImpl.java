@@ -6,29 +6,39 @@ import godxero.repository.custom.CustomerRepository;
 import godxero.util.CrudUtil;
 import javafx.scene.control.Alert;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
 	@Override
 	public boolean save (CustomerEntity entity) {
+		return false;
+	}
+
+	@Override
+	public int addCustomer (CustomerEntity entity) {
 		try {
-			return (Integer) CrudUtil.execute(
-				"INSERT INTO customer (name, phone, email, address) VALUES (?, ?, ?, ?)",
-				entity.getName(),
-				entity.getPhone(),
-				entity.getEmail(),
-				entity.getAddress()
-			) == 1;
+			final Connection connection = DBConnection.getInstance().getConnection();
+			final PreparedStatement addCustomerStatement = connection.prepareStatement("INSERT INTO customer (name, phone, email, address) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+
+			addCustomerStatement.setString(1, entity.getName());
+			addCustomerStatement.setString(2, entity.getPhone());
+			addCustomerStatement.setString(3, entity.getEmail());
+			addCustomerStatement.setString(4, entity.getAddress());
+
+			final int affectedRows = addCustomerStatement.executeUpdate();
+
+			if (affectedRows == 0) throw new SQLException("Insert new customer failed. no rows affected.");
+
+			final ResultSet generatedKeys = addCustomerStatement.getGeneratedKeys();
+
+			if (generatedKeys.next()) return generatedKeys.getInt(1);
 		} catch (SQLException exception) {
 			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 		}
 
-		return false;
+		return 0;
 	}
 
 	@Override

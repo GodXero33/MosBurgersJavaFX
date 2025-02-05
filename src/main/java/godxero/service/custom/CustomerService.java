@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CustomerService extends SuperService {
 	List<Customer> searchCustomerWithAny (Integer id, String name, String phone, String email);
-	boolean addCustomer (Customer customer);
+	int addCustomer (Customer customer);
 }

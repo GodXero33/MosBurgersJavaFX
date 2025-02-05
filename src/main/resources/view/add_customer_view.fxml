@@ -8,7 +8,8 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="471.0" prefWidth="600.0" stylesheets="@../css/login_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="godxero.controller.AddCustomerFormController">
+<!--<AnchorPane prefHeight="471.0" prefWidth="600.0" stylesheets="@../css/login_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="godxero.controller.AddCustomerFormController">-->
+<AnchorPane prefHeight="471.0" prefWidth="600.0" stylesheets="@../css/login_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="CENTER" prefHeight="92.0" prefWidth="600.0" styleClass="title" text="Add Customer">
          <font>

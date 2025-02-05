@@ -51,8 +51,11 @@ public class AddCustomerFormController {
 		}
 
 		final Customer newCustomer = new Customer(null, name, phone, email, address);
+		final int newCustomerID = this.customerService.addCustomer(newCustomer);
 
-		if (this.customerService.addCustomer(newCustomer)) {
+		newCustomer.setId(newCustomerID);
+
+		if (newCustomerID > 0) {
 			new Alert(Alert.AlertType.INFORMATION, "New Customer added.").showAndWait();
 			this.parent.setNewCustomer(newCustomer);
 			((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();

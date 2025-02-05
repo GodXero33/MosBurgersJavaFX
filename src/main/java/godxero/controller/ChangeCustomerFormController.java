@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
@@ -110,10 +109,9 @@ public class ChangeCustomerFormController implements Initializable {
 	public void addCustomerButtonOnAction (ActionEvent actionEvent) {
 		try {
 			final Stage stage = new Stage();
-			final FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../../view/add_customer_view.fxml"));
+			final FXMLLoader loader = FormControlManager.createForm(stage, this.getClass().getResource("../../view/add_customer_view.fxml"), AddCustomerFormController.class);
 
 			stage.setTitle("Add Customer");
-			stage.setScene(new Scene(loader.load()));
 			stage.setResizable(false);
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());

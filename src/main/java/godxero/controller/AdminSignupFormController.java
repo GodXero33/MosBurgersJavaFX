@@ -116,27 +116,11 @@ public class AdminSignupFormController {
 		return true;
 	}
 
-	private void openLoginView (Stage signUpStage) {
-		try {
-			// Open new stage. (Login view)
-			final Stage stage = new Stage();
-
-			stage.setTitle("Login");
-			stage.setScene(new Scene(new FXMLLoader(this.getClass().getResource("../../view/login_view.fxml")).load()));
-			stage.show();
-
-			// Close this login view.
-			signUpStage.close();
-		} catch (IOException exception) {
-			new Alert(Alert.AlertType.ERROR, "Failed to load application.").show();
-			System.out.println(exception.getMessage());
-		}
-	}
-
+	@FXML
 	public void signupButtonOnAction (ActionEvent actionEvent) {
 		if (this.validateNewAdminData()) {
 			new Alert(Alert.AlertType.INFORMATION, "New admin added. Please login again.").showAndWait();
-			this.openLoginView((Stage) ((Node) actionEvent.getSource()).getScene().getWindow());
+			((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
 		}
 	}
 }
