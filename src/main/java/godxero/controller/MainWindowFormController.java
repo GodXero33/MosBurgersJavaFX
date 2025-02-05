@@ -387,7 +387,7 @@ public class MainWindowFormController implements Initializable {
 			return;
 		}
 
-		if (this.orderService.placeOrder(this.currentOrder) == 1) {
+		if (this.orderService.placeOrder(this.currentOrder)) {
 			new Alert(Alert.AlertType.INFORMATION, "Order placed.").show();
 			this.currentOrder = new Order();
 			this.customerID = -1;

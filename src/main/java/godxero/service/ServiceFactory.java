@@ -20,10 +20,10 @@ public class ServiceFactory {
 	@SuppressWarnings("unchecked")
 	public <T extends SuperService> T getServiceType (ServiceType serviceType) {
 		return switch (serviceType) {
-			case ADMIN -> (T) AdminServiceImpl.getInstance();
-			case CUSTOMER -> (T) CustomerServiceImpl.getInstance();
-			case FOOD_ITEM -> (T) FoodItemServiceImpl.getInstance();
-			case ORDER -> (T) OrderServiceImpl.getInstance();
+			case ServiceType.ADMIN -> (T) AdminServiceImpl.getInstance();
+			case ServiceType.CUSTOMER -> (T) CustomerServiceImpl.getInstance();
+			case ServiceType.FOOD_ITEM -> (T) FoodItemServiceImpl.getInstance();
+			case ServiceType.ORDER -> (T) OrderServiceImpl.getInstance();
 		};
 	}
 }

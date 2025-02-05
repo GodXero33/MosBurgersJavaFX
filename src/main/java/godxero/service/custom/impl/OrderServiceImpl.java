@@ -21,9 +21,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int placeOrder (Order order) {
+	public boolean placeOrder (Order order) {
 		final OrderEntity orderEntity = new ModelMapper().map(order, OrderEntity.class);
 
-		return this.orderRepository.placeOrder(orderEntity);
+		return this.orderRepository.save(orderEntity);
 	}
 }

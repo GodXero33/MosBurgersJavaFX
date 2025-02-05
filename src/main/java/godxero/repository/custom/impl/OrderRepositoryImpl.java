@@ -24,31 +24,6 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public boolean save (OrderEntity entity) {
-		return false;
-	}
-
-	@Override
-	public OrderEntity search (Integer id) {
-		return null;
-	}
-
-	@Override
-	public boolean delete (Integer id) {
-		return false;
-	}
-
-	@Override
-	public boolean update (OrderEntity entity) {
-		return false;
-	}
-
-	@Override
-	public List<OrderEntity> getAll () {
-		return List.of();
-	}
-
-	@Override
-	public int placeOrder (OrderEntity entity) {
 		try {
 			final Connection connection = DBConnection.getInstance().getConnection();
 
@@ -67,7 +42,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 			if (affectedRows == 0) throw new SQLException("Insert new order failed. no rows affected.");
 
-			int orderID = -1;
+			int orderID;
 			final ResultSet generatedKeys = placeOrderStatement.getGeneratedKeys();
 
 			if (generatedKeys.next()) {
@@ -96,7 +71,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 				if (updateFoodItemQuantityStatement.executeUpdate() != 1) throw new SQLException("Failed to update quantity of a food item. Food Item: " + orderItemEntity.getFoodItem().getId());
 			}
 
-			return 1;
+			return true;
 		} catch (SQLException exception) {
 			try {
 				DBConnection.getInstance().getConnection().rollback();
@@ -113,6 +88,26 @@ public class OrderRepositoryImpl implements OrderRepository {
 			}
 		}
 
-		return 0;
+		return false;
+	}
+
+	@Override
+	public OrderEntity search (Integer id) {
+		return null;
+	}
+
+	@Override
+	public boolean delete (Integer id) {
+		return false;
+	}
+
+	@Override
+	public boolean update (OrderEntity entity) {
+		return false;
+	}
+
+	@Override
+	public List<OrderEntity> getAll () {
+		return List.of();
 	}
 }
