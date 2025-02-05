@@ -29,7 +29,7 @@ public class FoodItemServiceImpl implements FoodItemService {
 		final List<FoodItem> foodItems = new ArrayList<>();
 		final ModelMapper mapper = new ModelMapper();
 
-		foodItemEntities.forEach(foodItemEntity -> mapper.map(foodItemEntity, FoodItem.class));
+		foodItemEntities.forEach(foodItemEntity -> foodItems.add(mapper.map(foodItemEntity, FoodItem.class)));
 
 		return foodItems;
 	}

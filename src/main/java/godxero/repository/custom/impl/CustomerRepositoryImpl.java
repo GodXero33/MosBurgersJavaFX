@@ -91,19 +91,19 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 				params.add(email);
 			}
 
-			try (final PreparedStatement statement = connection.prepareStatement(queryBuilder.toString())) {
-				for (int a = 0; a < params.size(); a++) statement.setObject(a + 1, params.get(a));
+			final PreparedStatement statement = connection.prepareStatement(queryBuilder.toString());
 
-				try (final ResultSet resultSet = statement.executeQuery()) {
-					while (resultSet.next()) customers.add(new CustomerEntity(
-						resultSet.getInt(1),
-						resultSet.getString(2),
-						resultSet.getString(3),
-						resultSet.getString(4),
-						resultSet.getString(5)
-					));
-				}
-			}
+			for (int a = 0; a < params.size(); a++) statement.setObject(a + 1, params.get(a));
+
+			final ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) customers.add(new CustomerEntity(
+				resultSet.getInt(1),
+				resultSet.getString(2),
+				resultSet.getString(3),
+				resultSet.getString(4),
+				resultSet.getString(5)
+			));
 		} catch (SQLException exception) {
 			new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
 		}

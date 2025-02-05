@@ -1,8 +1,6 @@
 package godxero.repository.custom.impl;
 
 import godxero.db.DBConnection;
-import godxero.dto.Order;
-import godxero.dto.OrderItem;
 import godxero.entity.OrderEntity;
 import godxero.entity.OrderItemEntity;
 import godxero.repository.custom.OrderRepository;
@@ -56,53 +54,49 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 			connection.setAutoCommit(false);
 
-			try (final PreparedStatement placeOrderStatement = connection.prepareStatement("INSERT INTO mos_order (place_date, total_amount, discount, final_amount, customer_id, admin_id) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
-				placeOrderStatement.setString(1, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-				placeOrderStatement.setDouble(2, entity.getTotalAmount());
-				placeOrderStatement.setDouble(3, entity.getDiscount());
-				placeOrderStatement.setDouble(4, entity.getFinalAmount());
-				placeOrderStatement.setInt(5, entity.getCustomerID());
-				placeOrderStatement.setInt(6, entity.getAdminID());
+			final PreparedStatement placeOrderStatement = connection.prepareStatement("INSERT INTO mos_order (place_date, total_amount, discount, final_amount, customer_id, admin_id) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
-				final int affectedRows = placeOrderStatement.executeUpdate();
+			placeOrderStatement.setString(1, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+			placeOrderStatement.setDouble(2, entity.getTotalAmount());
+			placeOrderStatement.setDouble(3, entity.getDiscount());
+			placeOrderStatement.setDouble(4, entity.getFinalAmount());
+			placeOrderStatement.setInt(5, entity.getCustomerID());
+			placeOrderStatement.setInt(6, entity.getAdminID());
 
-				if (affectedRows == 0) throw new SQLException("Insert new order failed. no rows affected.");
+			final int affectedRows = placeOrderStatement.executeUpdate();
 
-				int orderID = -1;
+			if (affectedRows == 0) throw new SQLException("Insert new order failed. no rows affected.");
 
-				try (final ResultSet generatedKeys = placeOrderStatement.getGeneratedKeys()) {
-					if (generatedKeys.next()) {
-						orderID = generatedKeys.getInt(1);
-					} else {
-						throw new SQLException("Creating order failed, no ID obtained.");
-					}
-				}
+			int orderID = -1;
+			final ResultSet generatedKeys = placeOrderStatement.getGeneratedKeys();
 
-				final List<OrderItemEntity> orderItems = entity.getOrderItems();
-
-				try (
-					final PreparedStatement placeOrderItemStatement = connection.prepareStatement("INSERT INTO order_item (item_id, order_id, quantity, total_price, price_per_unit) VALUE (?, ?, ?, ?, ?)");
-					final PreparedStatement updateFoodItemQuantityStatement = connection.prepareStatement("UPDATE food_item SET quantity = quantity - ? WHERE item_id = ?")
-				) {
-					placeOrderItemStatement.setInt(2, orderID);
-
-					for (final OrderItemEntity orderItemEntity : orderItems) {
-						placeOrderItemStatement.setInt(1, orderItemEntity.getFoodItem().getId());
-						placeOrderItemStatement.setInt(3, orderItemEntity.getQuantity());
-						placeOrderItemStatement.setDouble(4, orderItemEntity.getTotal());
-						placeOrderItemStatement.setDouble(5, orderItemEntity.getPrice());
-
-						updateFoodItemQuantityStatement.setInt(1, orderItemEntity.getQuantity());
-						updateFoodItemQuantityStatement.setInt(2, orderItemEntity.getFoodItem().getId());
-
-						if (placeOrderItemStatement.executeUpdate() != 1) throw new SQLException("Order Item failed to insert. Order Item: " + orderItemEntity.getFoodItem());
-
-						if (updateFoodItemQuantityStatement.executeUpdate() != 1) throw new SQLException("Failed to update quantity of a food item. Food Item: " + orderItemEntity.getFoodItem().getId());
-					}
-
-					return 1;
-				}
+			if (generatedKeys.next()) {
+				orderID = generatedKeys.getInt(1);
+			} else {
+				throw new SQLException("Creating order failed, no ID obtained.");
 			}
+
+			final List<OrderItemEntity> orderItems = entity.getOrderItems();
+			final PreparedStatement placeOrderItemStatement = connection.prepareStatement("INSERT INTO order_item (item_id, order_id, quantity, total_price, price_per_unit) VALUE (?, ?, ?, ?, ?)");
+			final PreparedStatement updateFoodItemQuantityStatement = connection.prepareStatement("UPDATE food_item SET quantity = quantity - ? WHERE item_id = ?");
+
+			placeOrderItemStatement.setInt(2, orderID);
+
+			for (final OrderItemEntity orderItemEntity : orderItems) {
+				placeOrderItemStatement.setInt(1, orderItemEntity.getFoodItem().getId());
+				placeOrderItemStatement.setInt(3, orderItemEntity.getQuantity());
+				placeOrderItemStatement.setDouble(4, orderItemEntity.getTotal());
+				placeOrderItemStatement.setDouble(5, orderItemEntity.getPrice());
+
+				updateFoodItemQuantityStatement.setInt(1, orderItemEntity.getQuantity());
+				updateFoodItemQuantityStatement.setInt(2, orderItemEntity.getFoodItem().getId());
+
+				if (placeOrderItemStatement.executeUpdate() != 1) throw new SQLException("Order Item failed to insert. Order Item: " + orderItemEntity.getFoodItem());
+
+				if (updateFoodItemQuantityStatement.executeUpdate() != 1) throw new SQLException("Failed to update quantity of a food item. Food Item: " + orderItemEntity.getFoodItem().getId());
+			}
+
+			return 1;
 		} catch (SQLException exception) {
 			try {
 				DBConnection.getInstance().getConnection().rollback();

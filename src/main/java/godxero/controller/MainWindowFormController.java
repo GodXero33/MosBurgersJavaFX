@@ -210,12 +210,12 @@ public class MainWindowFormController implements Initializable {
 		this.updatePlaceOrderItemsTable(this.placeOrderFoodItemsList);
 	}
 
-	private void updatePlaceOrderItemsTable (String filterName) {
+	private List<FoodItem> getFoodItemsSearchedByName (String searchName) {
 		final List<FoodItem> filteredFoodItems = new ArrayList<>();
 
-		for (final FoodItem foodItem : this.placeOrderFoodItemsList) if (foodItem.getName().toLowerCase().contains(filterName.toLowerCase().trim())) filteredFoodItems.add(foodItem); // Filter all matching food items from the 'foodItems' field.
+		for (final FoodItem foodItem : this.placeOrderFoodItemsList) if (foodItem.getName().toLowerCase().contains(searchName.toLowerCase().trim())) filteredFoodItems.add(foodItem); // Filter all matching food items from the 'foodItems' field.
 
-		this.updatePlaceOrderItemsTable(filteredFoodItems);
+		return filteredFoodItems;
 	}
 
 	private void updatePlaceOrderCartTable () {
@@ -239,8 +239,9 @@ public class MainWindowFormController implements Initializable {
 	}
 
 	private void updatePlaceOrderFilterFoodItemCheckBoxStatus (String key, boolean status) {
+		final List<FoodItem> filteredFoodItems = this.getFoodItemsSearchedByName(this.placeOrderSearchItemTextField.getText());
 		this.filteredCategories.put(key, status);
-		this.updatePlaceOrderItemsTable(this.placeOrderFoodItemsList);
+		this.updatePlaceOrderItemsTable(filteredFoodItems);
 	}
 
 	private void refreshPlaceOrderFoodItemsListTable () {
@@ -251,14 +252,14 @@ public class MainWindowFormController implements Initializable {
 		if (filterName.isEmpty()) {
 			this.updatePlaceOrderItemsTable(this.placeOrderFoodItemsList);
 		} else {
-			this.updatePlaceOrderItemsTable(filterName);
+			this.updatePlaceOrderItemsTable(this.getFoodItemsSearchedByName(filterName));
 		}
 	}
 
 	@FXML
 	public void placeOrderSearchItemTextFieldOnKeyReleased (KeyEvent keyEvent) {
 		// Filter food items and update the food items table while inserting text.
-		this.updatePlaceOrderItemsTable(this.placeOrderSearchItemTextField.getText());
+		this.updatePlaceOrderItemsTable(this.getFoodItemsSearchedByName(this.placeOrderSearchItemTextField.getText()));
 	}
 
 	@FXML
@@ -402,7 +403,7 @@ public class MainWindowFormController implements Initializable {
 
 	@FXML
 	public void placeOrderFoodItemFilterBurgerCheckBoxOnAction (ActionEvent actionEvent) {
-		this.updatePlaceOrderFilterFoodItemCheckBoxStatus("Burger", ((CheckBox) actionEvent.getTarget()).isSelected());
+		this.updatePlaceOrderFilterFoodItemCheckBoxStatus("Burgers", ((CheckBox) actionEvent.getTarget()).isSelected());
 	}
 
 	@FXML
