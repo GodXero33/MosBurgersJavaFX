@@ -1,6 +1,7 @@
 package godxero.controller;
 
 import com.google.inject.Inject;
+import godxero.Main;
 import godxero.service.custom.CustomerService;
 import godxero.dto.Customer;
 import javafx.collections.FXCollections;
@@ -109,7 +110,7 @@ public class ChangeCustomerFormController implements Initializable {
 	public void addCustomerButtonOnAction (ActionEvent actionEvent) {
 		try {
 			final Stage stage = new Stage();
-			final FXMLLoader loader = FormControlManager.createForm(stage, this.getClass().getResource("../../view/add_customer_view.fxml"), AddCustomerFormController.class);
+			final FXMLLoader loader = FormControlManager.createForm(stage, "add_customer_view", AddCustomerFormController.class);
 
 			stage.setTitle("Add Customer");
 			stage.setResizable(false);
@@ -121,6 +122,7 @@ public class ChangeCustomerFormController implements Initializable {
 			stage.showAndWait();
 		} catch (IOException exception) {
 			new Alert(Alert.AlertType.ERROR, "Failed to load application.").show();
+			exception.printStackTrace();
 			System.out.println(exception.getMessage());
 		}
 	}

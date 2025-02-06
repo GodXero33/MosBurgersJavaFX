@@ -23,17 +23,17 @@
 <AnchorPane prefHeight="573.0" prefWidth="1161.0" stylesheets="@../css/main_window_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane layoutY="79.0" prefHeight="491.0" prefWidth="1161.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Place Order">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="877.0">
+         <tabs>
+            <Tab text="Place Order">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="877.0">
                      <children>
                         <Pane layoutX="14.0" layoutY="14.0" prefHeight="473.0" prefWidth="289.0">
                            <children>
                               <TableView fx:id="placeOrderItemsListTable" layoutY="106.0" prefHeight="354.0" prefWidth="288.0">
-                                <columns>
-                                  <TableColumn fx:id="placeOrderItemsListItemsColumn" editable="false" prefWidth="287.0" sortable="false" text="Food Items" />
-                                </columns>
+                                 <columns>
+                                    <TableColumn fx:id="placeOrderItemsListItemsColumn" editable="false" prefWidth="287.0" sortable="false" text="Food Items" />
+                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
@@ -211,13 +211,13 @@
                            </image>
                         </ImageView>
                         <TableView fx:id="placeOrderCartTable" layoutX="678.0" layoutY="51.0" prefHeight="381.0" prefWidth="444.0">
-                          <columns>
-                            <TableColumn fx:id="placeOrderCartTableItemColumn" prefWidth="107.0" text="Food Item" />
+                           <columns>
+                              <TableColumn fx:id="placeOrderCartTableItemColumn" prefWidth="107.0" text="Food Item" />
                               <TableColumn fx:id="placeOrderCartTablePriceColumn" prefWidth="87.0" text="Price (Rs)" />
                               <TableColumn fx:id="placeOrderCartTableDiscountColumn" prefWidth="94.0" text="Discount (Rs)" />
                               <TableColumn fx:id="placeOrderCartTableQuantityColumn" prefWidth="66.0" text="Quantity" />
                               <TableColumn fx:id="placeOrderCartTableTotalColumn" prefWidth="89.0" text="Total" />
-                          </columns>
+                           </columns>
                         </TableView>
                         <Label alignment="CENTER" layoutX="679.0" layoutY="14.0" prefHeight="37.0" prefWidth="443.0" text="Cart">
                            <font>
@@ -279,14 +279,14 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Add Item">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-        </tabs>
+               </content>
+            </Tab>
+            <Tab text="Add Item">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+         </tabs>
       </TabPane>
       <Label fx:id="mainDateLabel" alignment="CENTER" layoutX="14.0" layoutY="42.0" prefHeight="37.0" prefWidth="211.0" text="2000 / January / 00">
          <font>

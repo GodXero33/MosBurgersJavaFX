@@ -341,7 +341,7 @@ public class MainWindowFormController implements Initializable {
 	public void placeOrderCustomerChangeButtonOnAction (ActionEvent actionEvent) {
 		try {
 			final Stage stage = new Stage();
-			final FXMLLoader loader = FormControlManager.createForm(stage, this.getClass().getResource("../../view/change_customer_view.fxml"), ChangeCustomerFormController.class);
+			final FXMLLoader loader = FormControlManager.createForm(stage, "change_customer_view", ChangeCustomerFormController.class);
 
 			stage.setTitle("Change Customer");
 			stage.setResizable(false);

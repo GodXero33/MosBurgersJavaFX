@@ -48,13 +48,13 @@
          </font>
       </TextField>
       <TableView fx:id="customersListTable" layoutX="18.0" layoutY="269.0" prefHeight="233.0" prefWidth="564.0">
-        <columns>
-          <TableColumn fx:id="customersListIDColumn" editable="false" prefWidth="54.0" sortable="false" text="ID" />
-          <TableColumn fx:id="customersListNameColumn" editable="false" prefWidth="108.0" text="Name" />
+         <columns>
+            <TableColumn fx:id="customersListIDColumn" editable="false" prefWidth="54.0" sortable="false" text="ID" />
+            <TableColumn fx:id="customersListNameColumn" editable="false" prefWidth="108.0" text="Name" />
             <TableColumn fx:id="customersListPhoneColumn" editable="false" prefWidth="110.0" sortable="false" text="Phone" />
             <TableColumn fx:id="customersListEmailColumn" editable="false" prefWidth="137.0" sortable="false" text="Email" />
             <TableColumn fx:id="customersListAddressColumn" editable="false" prefWidth="154.0" sortable="false" text="Address" />
-        </columns>
+         </columns>
       </TableView>
       <Button layoutX="19.0" layoutY="507.0" mnemonicParsing="false" onAction="#addCustomerButtonOnAction" text="Add New Customer">
          <font>

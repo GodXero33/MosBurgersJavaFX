@@ -65,7 +65,7 @@ public class LoginFormController {
 		try {
 			// Open new stage. (Main application view)
 			final Stage stage = new Stage();
-			final FXMLLoader loader = FormControlManager.createForm(stage, this.getClass().getResource("../../view/main_window_view.fxml"), MainWindowFormController.class);
+			final FXMLLoader loader = FormControlManager.createForm(stage, "main_window_view", MainWindowFormController.class);
 
 			stage.setTitle("Mos Burgers");
 			stage.setResizable(false);
@@ -106,7 +106,7 @@ public class LoginFormController {
 			// Open new stage. (Sign up view)
 			final Stage stage = new Stage();
 
-			FormControlManager.createForm(stage, this.getClass().getResource("../../view/admin_signup_view.fxml"), AdminSignupFormController.class);
+			FormControlManager.createForm(stage, "admin_signup_view", AdminSignupFormController.class);
 			stage.setTitle("Sign Up");
 			stage.setResizable(false);
 			stage.initModality(Modality.APPLICATION_MODAL);

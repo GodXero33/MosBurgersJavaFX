@@ -14,7 +14,8 @@ public class Starter extends Application {
 
 	@Override
 	public void start (Stage stage) throws IOException {
-		FormControlManager.createForm(stage, this.getClass().getResource("../view/login_view.fxml"), LoginFormController.class);
+		FormControlManager.createForm(stage, "login_view",
+			LoginFormController.class);
 		stage.setResizable(false);
 		stage.setTitle("Login");
 		stage.show();
